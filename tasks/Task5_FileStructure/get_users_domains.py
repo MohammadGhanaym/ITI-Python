@@ -1,37 +1,38 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[31]:
+# In[6]:
 
 
 import csv
 from email_utils import get_email_domain
 
 
-# In[32]:
+# In[7]:
 
 
 file = open('users.csv', 'r', newline="")
 reader = csv.reader(file)
 
 
-# In[33]:
+# In[8]:
 
 
 valid_emails = []
 invalid_emails = []
 domains = set()
 
-for row in reader:
+reader = list(reader)
+for row in range(1, len(reader)):
     try:
-        domains.add(get_email_domain(row[1]))
-        valid_emails.append(row[1])
+        domains.add(get_email_domain(reader[row][1]))
+        valid_emails.append(reader[row][1])
     except Exception as e:
         if str(e) == 'Invalid email address':
-            invalid_emails.append(row[1])
+            invalid_emails.append(reader[row][1])
 
 
-# In[34]:
+# In[9]:
 
 
 print("Unique Domains: {}".format(domains))
